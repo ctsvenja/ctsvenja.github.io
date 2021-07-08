@@ -1,0 +1,107 @@
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+body .swiper-container {
+  position: relative;
+}
+
+body .swiper-container .swiper-button-next, body .swiper-container .swiper-button-prev {
+  width: 42px;
+  height: 42px;
+  background-color: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  color: gray;
+}
+
+body .swiper-container .swiper-button-next::after, body .swiper-container .swiper-button-prev::after {
+  font-size: 20px;
+}
+
+body .swiper-container .swiper-pagination {
+  pointer-events: auto;
+}
+
+body .swiper-container .swiper-pagination .pause, body .swiper-container .swiper-pagination .play {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  z-index: 2;
+  left: 50%;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  bottom: -3px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+body .swiper-container .swiper-pagination .pause:hover, body .swiper-container .swiper-pagination .play:hover {
+  background-color: #000;
+}
+
+body .swiper-container .swiper-pagination .pause:hover .fas.fa-play, body .swiper-container .swiper-pagination .play:hover .fas.fa-play {
+  color: #fff !important;
+}
+
+body .swiper-container .swiper-pagination .pause:hover .fas.fa-pause, body .swiper-container .swiper-pagination .play:hover .fas.fa-pause {
+  color: #fff !important;
+}
+
+body .swiper-container .swiper-pagination .pause:hover::after, body .swiper-container .swiper-pagination .play:hover::after {
+  display: block;
+}
+
+body .swiper-container .swiper-pagination .pause::after, body .swiper-container .swiper-pagination .play::after {
+  content: attr(data-text);
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70px;
+  height: 25px;
+  left: 300;
+  top: 0;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  border: 1px solid #DDD;
+  color: black;
+  font-size: 10px;
+  line-height: 25px;
+  padding: 0 5px;
+  display: none;
+}
+
+body .swiper-container .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff !important;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .swiper-container .swiper-slide picture img {
+  width: 100%;
+}
+/*# sourceMappingURL=microsoft.css.map */

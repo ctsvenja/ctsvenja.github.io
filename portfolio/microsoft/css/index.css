@@ -1,0 +1,734 @@
+* {
+  box-sizing: border-box;
+  font-size: 15px;
+  font-family: "Segoe UI", SegoeUI, "Microsoft JhengHei", 微軟正黑體,
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.container,
+.containerFull {
+  max-width: 1620px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  font-size: 13px;
+}
+nav .left-menu .menu-button {
+  display: none;
+  width: 48px;
+  height: 48px;
+  padding: 17px 12px;
+  /* background-color: #00000099; */
+}
+
+nav .left-menu .menu-button img {
+  width: 20px;
+  height: 20px;
+}
+nav .left-menu .menu-button-dropdown {
+  display: none;
+  width: 100vw;
+  color: #262626;
+  background-color: #f2f2f2;
+  position: absolute;
+  z-index: 2;
+}
+nav .left-menu .menu-button-dropdown:hover {
+  display: block;
+}
+nav .left-menu .menu-button-dropdown ul > li:active {
+  border: 1px dashed black;
+}
+nav .left-menu .menu-button:hover ~ .menu-button-dropdown {
+  display: block;
+}
+/* nav .left-menu .menu-button-dropdown ul:hover li{
+  text-decoration: underline;
+} */
+nav .left-menu .menu-button-dropdown ul li {
+  display: block;
+  font-size: 15px;
+  color: #262626;
+  border-bottom: 1px solid #e6e6e6;
+}
+nav .left-menu .menu-button-dropdown ul li > a > img {
+  float: right;
+}
+nav .left-menu .menu-button-dropdown ul > li > ul {
+  display: none;
+  padding: 0 0 0 30px;
+}
+nav .left-menu .menu-button-dropdown ul > li:hover > ul {
+  display: block;
+}
+nav .left-menu .menu-button-dropdown ul li a {
+  display: block;
+  font-size: 15px;
+  color: #262626;
+  padding: 14px 24px 15px 15px;
+}
+
+nav .logo-link {
+  padding: 16px 8px 10px;
+  width: 137px;
+}
+nav .logo {
+  width: 108px;
+}
+
+nav .normal:active {
+  border: 1px dashed;
+}
+nav ul li a:hover {
+  text-decoration: underline;
+}
+nav .main-menu {
+  display: flex;
+  width: 72%;
+}
+nav .navbar > li:not(.sub-icon),
+nav .navbar > li > a {
+  font-size: 13px;
+  padding: 10px 8px 12px;
+  color: #262626;
+  margin-top: 10px;
+}
+nav .main-menu .more {
+  display: none;
+  z-index: 1;
+  /* background-color: #000; */
+  position: relative;
+}
+
+nav .arrow {
+  width: 12px;
+  height: 12px;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+}
+
+nav .main-menu .more ul {
+  display: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 2px solid black;
+  background-color: #f2f2f2;
+  position: absolute;
+  top: 40px;
+}
+nav .main-menu .more:hover ul {
+  display: block;
+}
+nav .main-menu .more li {
+  width: 168px;
+  padding: 18px 0 18px 24px;
+}
+nav .main-menu .more li:hover {
+  background-color: #f8f8f8;
+}
+nav .main-menu .more li:active {
+  border: 1px dashed;
+}
+
+nav .sub-menu {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+}
+
+nav .sub-menu li span {
+  padding: 0 8px;
+}
+
+nav .sub-menu .sub-icon {
+  transform: translateY(-3px);
+}
+nav .icon-btn {
+  display: flex;
+  padding: 8px 5px;
+}
+
+nav .icon-btn span {
+  font-size: 13px;
+  padding: 0 5px 0 0;
+  color: #262626;
+}
+
+nav .search img,
+.shoppingcart img {
+  width: 16px;
+  height: 16px;
+}
+nav .login img {
+  width: 32px;
+  height: 32px;
+  padding-bottom: 0;
+  transform: translateY(-6px);
+}
+.all.dropdown{
+  z-index: 5;
+}
+.all {
+  position: relative;
+}
+.all:hover .all-dropdownMenu {
+  display: block;
+}
+.all-dropdownMenu {
+  display: none;
+  /* display: flex; */
+  max-width: 1230px;
+  width: 85.4vw;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  margin-top: 15px;
+  position: absolute;
+  right: -200px;
+  border-bottom: black 2px solid;
+  z-index: 1;
+}
+.all-dropdownMenu .list {
+  display: flex;
+  /* flex-wrap: wrap; */
+  width: 100%;
+}
+.all-dropdownMenu ul {
+  padding: 0 0 10px 0;
+}
+.all-dropdownMenu li {
+  width: 195px;
+  padding: 12px 0 12px 24px;
+  margin: 0;
+  font-size: 13px;
+  color: #262626;
+}
+.all-dropdownMenu > .list > ul li:active {
+  border: 1px dashed;
+}
+.all-dropdownMenu > .list > ul > li:first-of-type {
+  font-weight: 500;
+  padding: 18px 30px 18px 24px;
+}
+.all-dropdownMenu > .list > ul li a {
+  color: #262626;
+}
+
+.checkSiteMap {
+  background-color: #e6e6e6;
+  height: 38px;
+  text-align: center;
+  line-height: 38px;
+}
+.checkSiteMap > a {
+  display: block;
+  width: 270px;
+  height: 36px;
+  padding: 0;
+  /* padding: 18px 0 18px 24px; */
+  color: #000000cc;
+  margin: 0 auto;
+}
+.checkSiteMap > a:active {
+  border: 1px dashed;
+}
+
+/*banner開始*/
+.banner {
+  position: relative;
+  padding: 0 0 0 5%;
+  height: 31.25vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.block {
+  position: absolute;
+  left:10%;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: left;
+}
+.block h1 {
+  font-size: 34px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+
+.block a:hover img {
+  transform: translate(4px, -2px);
+  transition: 0.3s;
+}
+
+.block .button {
+  background-color: #000;
+  width: 123.13px;
+  height: 39.2px;
+  text-align: center;
+  line-height: 39.2px;
+  margin: 12px 0 0;
+}
+
+.block .button span {
+  color: #fff;
+}
+.block .button span:hover {
+  border-bottom: 2px white solid;
+}
+
+.block .button img {
+  width: 12px;
+  height: 15.2px;
+  vertical-align: text-bottom;
+  transform: translateY(-2px);
+}
+/*banner結束*/
+
+.section1 .banner1 {
+  background-image: url("../img/nav1.jpg");
+}
+
+.block2 {
+  display: none;
+  /* display: table; */
+  background-color: #e6e6e6;
+  width: 100%;
+  height: 320px;
+}
+.block-hidden {
+  display: table-cell;
+  width: 80%;
+  height: 100%;
+  background-color: #e6e6e6;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+.block-hidden h1 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+/*為什麼h1可以用text-align center
+p卻不能*/
+.block-hidden a:hover img {
+  transform: translateX(4px);
+  transition: 0.3s;
+}
+
+.block-hidden .button {
+  background-color: #000;
+  width: 123.13px;
+  height: 39.2px;
+  text-align: center;
+  line-height: 39.2px;
+  color: #fff;
+  margin: 12px auto 0;
+}
+.block-hidden .button span {
+  color: #fff;
+}
+.block-hidden .button span:hover {
+  border-bottom: 2px white solid;
+}
+
+.block-hidden .button img {
+  width: 12px;
+  height: 15.2px;
+  vertical-align: middle;
+}
+
+.section2 .cards {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+.section2 .cards a:hover {
+  text-decoration: underline;
+}
+.section2 .cards a:active {
+  border: 2px solid black;
+  background-color: #e5eff8;
+}
+
+.section2 .cards .card {
+  /* background-color: #454545; */
+  width: 184px;
+  padding: 12px 6px;
+}
+
+.section2 .cards .card img {
+  /* background-color: red; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+}
+
+.section2 .cards .card p {
+  /* background-color: yellow; */
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+/*商品開始*/
+.products {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 48px 0;
+}
+.products .product {
+  width: 25%;
+  margin: 0 25px 0 0;
+}
+.products .product:hover {
+  opacity: 0.9;
+}
+.products .product:last-of-type {
+  margin: 0 0 0 0;
+}
+.products .product .product-info {
+  margin: 37px 0 0 0;
+}
+.products .product img {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+}
+.products .product h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.products .product .product-link span {
+  color: #0067b8;
+}
+.products .product .product-link:hover img {
+  transform: translateX(4px);
+  transition: 0.3s;
+}
+.products .product .product-link:hover span {
+  /* text-decoration: underline; */
+  border-bottom: 2px #0067b8 solid;
+}
+.products .product .product-link img {
+  width: 12px;
+  height: 12px;
+}
+/*商品結束*/
+
+.section4 .banner2 {
+  background-image: url("../img/section3.jpg");
+}
+.section4 .banner2 .block p br{
+  display:none;  
+}
+.section5 {
+  padding: 48px 0 0 0;
+}
+.section5 h2 {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.section6 {
+  margin: 0 0 48px 0;
+}
+.section6 span {
+  color: #00000099;
+}
+.section6 span a img {
+  width: 28px;
+  height: 28px;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+footer {
+  background-color: #f2f2f2;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer a:active {
+  border: 1px dashed;
+}
+footer .footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+footer .footer-top ul li:first-of-type {
+  font-weight: 500;
+  font-size: 15px;
+}
+footer ul li,
+ul li a {
+  color: #616161;
+  list-style-type: none;
+  font-size: 12px;
+  padding: 8px 0;
+}
+
+footer .footer-top ul {
+  max-width: 245px;
+  width: 100%;
+  /* width: calc(100% / 6); */
+  padding: 36px 0 4px;
+  margin: 0;
+}
+footer .footer-btm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 30px 0 16px 0;
+}
+footer .footer-btm ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+footer .footer-btm ul li {
+  padding: 0 24px 0 4px;
+}
+footer .footer-btm > a {
+  display: inline-block;
+  color: #616161;
+  font-size: 12px;
+  padding: 0 0 12px 0;
+}
+
+footer .footer-btm a img {
+  width: 20px;
+  height: 20px;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 1599px) {
+  .container,
+  .containerFull {
+    padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 1399px) {
+  .icon-btn > span {
+    display: none;
+  }
+  .search {
+    margin-left: 20px;
+  }
+  .all-dropdownMenu {
+    right: -200px;
+  }
+  .all-dropdownMenu .list {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 1229px) {
+  .all-dropdownMenu {
+    right: -150px;
+    padding: 0;
+  }
+  
+}
+@media screen and (max-width: 1084px) {
+    /*滿版*/
+    .container {
+      padding: 0 3%;
+    }
+    .containerFull {
+      padding: 0;
+    }
+    /*所有microsoft 移位置*/
+    
+    /*換照片*/
+    .banner {
+      height: 56.2326vw;
+      background-position: center;
+      background-size: cover;
+    }
+    .section1 .banner1 {
+      background-image: url("../img/nav2.jpg");
+    }
+    .section4 .banner2 {
+      background-image: url("../img/section3-1.jpg");
+    }
+    /*換成50%*/
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .products .product {
+      margin: 0 0 0 0;
+      width: 50%;
+      margin-bottom: 40px;
+      padding: 0 10px;
+    }
+    .section4 .banner2 .block p br{
+      display:block;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .xbox,
+    .support {
+      display: none;
+    }
+    nav .main-menu .more {
+      display: block;
+    }
+    .more-dropdownMenu ul li:first-of-type {
+      display: none;
+    }
+    nav .sub-menu {
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 870px) {
+    .surface {
+      display: none;
+    }
+    .more-dropdownMenu ul li:first-of-type {
+      display: block;
+    }
+  }
+  @media screen and (max-width: 859px) {
+    header .container:nth-child(1) {
+      padding: 0;
+    }
+    /*NAV 換新*/
+    nav .left-menu .menu-button {
+      display: block;
+    }
+    nav .navbar.main-menu {
+      display: none;
+    }
+    nav .all {
+      display: none;
+    }
+    nav .logo-link {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    nav .sub-menu {
+      width: 100%;
+    }
+    nav .sub-menu .sub-icon {
+      padding: 0;
+      margin: 0;
+    }
+    nav .sub-menu .search {
+      margin-right: auto;
+    }
+    nav .sub-menu .shoppingcart,
+    nav .sub-menu .login {
+      padding: 0 8px;
+    }
+    .banner .block h1 {
+      font-size: 24px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    /*BANNER換圖片*/
+    .section1 .banner1 {
+      background-image: url("../img/nav3.jpg");
+    }
+    .swiper-slide-active{
+      padding-bottom: 50%;
+      position: relative;
+      background-color: #E6E6E6;
+
+    }
+    /* 好煩好煩*/
+    .banner.banner2 .block{
+      display: none;
+    }
+    .block {
+      width: 100%;
+      height:50%;
+      text-align: center;
+      background-color: #E6E6E6;
+      position: absolute;
+
+      left: 0;
+      top: 75%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+      
+    }
+    .products .product .product-info {
+      margin: 12px 0 0 0;
+    }
+    /*BANNER長DIV*/
+    .block2 {
+      display: table;
+    }
+    /*SECTION2 長橫的 拿掉換行*/
+    .section2 .cards {
+      flex-direction: column;
+    }
+    .section2 .cards .card {
+      display: flex;
+      padding: 12px 6px 12px 10px;
+      width: auto;
+    }
+
+    .section2 .cards .card:nth-child(1) br {
+      display: none;
+    }
+    .section2 .cards .card img {
+      width: 20px;
+      height: 20px;
+      margin: 0 8px 0 0;
+    }
+  }
+  @media screen and (max-width: 539px) {
+    /*變100%*/
+    .container {
+      padding: 0 5%;
+    }
+    header .container:nth-child(1) {
+      width: 100%;
+    }
+    .products .product {
+      width: 100%;
+      margin-bottom: 60px;
+      padding: 0 0px;
+    }
+    .section5 h2 {
+      margin-top: 0;
+    }
+  }
+}
