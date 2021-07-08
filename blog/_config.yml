@@ -105,3 +105,4 @@ deploy:
   type: git
   repo: https://github.com/ctsvenja/ctsvenja.github.io
   branch: gh-pages
+  extend_dirs: /portfolio

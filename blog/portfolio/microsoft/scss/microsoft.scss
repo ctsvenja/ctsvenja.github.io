@@ -1,0 +1,93 @@
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  .swiper-container {
+    position: relative;
+    .swiper-button-next,.swiper-button-prev{
+      width: 42px;
+      height: 42px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.5) ;
+      color:gray;
+      &::after{
+        font-size: 20px;
+      }
+      
+    }
+    .swiper-pagination{
+        pointer-events: auto;
+
+        .pause,.play{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            z-index: 2;
+            left:50%;
+            transform: translateX(100%);
+            bottom:-3px;
+            color:rgba(0,0,0,0.5) ;
+            font-size: 15px;
+            line-height: 25px;
+            cursor: pointer;
+            &:hover{
+              background-color: #000;
+              .fas.fa-play{
+                color:#fff !important;
+              }
+              .fas.fa-pause{
+                color:#fff !important;
+              }
+              // .fas{
+              //   color:#fff !important;
+              // }
+              &::after{
+                display:block;
+              }
+            }
+            &::after{
+              content: attr(data-text);
+              position: absolute;
+              display: flex;
+              width: 70px;
+              height: 25px;
+              left:300;
+              top:0;
+              transform: translateX(50%);
+              border: 1px solid #DDD ;
+              color:black;
+              font-size: 10px;
+              line-height: 25px;
+              padding: 0 5px;
+              display: none;
+            }
+        }    
+    }
+  
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff !important;
+      /* Center slide text vertically */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      picture{
+        img{
+          width: 100%;
+      }
+      }
+
+    }
+    
+  }
+}
