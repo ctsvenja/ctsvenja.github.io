@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weather forecast</title>
+  <link rel="stylesheet" href="./css/loadingpage.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <section class="loading-page">
+    <div class="loading-page-inner">
+      <img class="loading-page-sun" src="./img/1.svg" alt="">
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+        <div class="loading-number">0%</div>
+      </div>
+    </div>
+  </section>
+
+
+  <label class="small">
+    <input id="all-night" type="checkbox">
+    <section class="weather-content">
+
+    </section>
+  </label>
+
+  <script>
+    var cities = ['基隆市','臺北市','新北市','桃園市','新竹市','新竹縣','苗栗縣', '臺中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣', '臺南市', '高雄市', '屏東縣', '臺東縣', '花蓮縣', '宜蘭縣', '澎湖縣', '金門縣', '連江縣']
+    var sortData = {};
+    fetch(
+      "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-B3FE9C48-C939-4B23-92B9-771F49BE49B1"
+    )
+      .then(function (response) {
+        return response.json();
+      })
+
+      .then(function (result) {
+        console.log(result);
+        var locations = result['records']['location'];
+        console.log(locations);
+        // 跑一個迴圈取資料
+        locations.forEach(function (location) {
+          var locationNameValue = location.locationName;
+          //Wx天氣狀況(早)
+          var WxValue = location.weatherElement[0].time[0].parameter.parameterName;
+          var WxValueNumber = location.weatherElement[0].time[0].parameter.parameterValue;
+          //Wx天氣狀況(晚)
+          var WxValue2 = location.weatherElement[0].time[1].parameter.parameterName;
+          var WxValue2Number = location.weatherElement[0].time[1].parameter.parameterValue;
+          //MaxT 最高溫度(早)
+          var MaxValue = location.weatherElement[4].time[0].parameter.parameterName;
+          //MaxT 最高溫度(晚)
+          var MaxValue2 = location.weatherElement[4].time[1].parameter.parameterName;
+          //MinT 最低溫度(早)
+          var MinValue = location.weatherElement[2].time[0].parameter.parameterName;
+          //MinT 最低溫度(晚)
+          var MinValue2 = location.weatherElement[2].time[1].parameter.parameterName;
+          //PoP降雨機率
+          var PoPValue = location.weatherElement[1].time[0].parameter.parameterName;
+          //存成物件
+          sortData[locationNameValue] = {
+            "WxValue": WxValue,
+            "WxValue2": WxValue2,
+            "WxValueNumber": WxValueNumber,
+            "WxValue2Number": WxValue2Number,
+            "MaxValue": MaxValue,
+            "MaxValue2": MaxValue2,
+            "MinValue": MinValue,
+            "MinValue2": MinValue2,
+            "PoPValue": PoPValue
+          };
+        })
+
+        var sectionValue = document.querySelector('.weather-content')
+        sectionValue.innerHTML = ''
+        cities.forEach(function (city, index) {
+          sectionValue.innerHTML += `
+              <div class="daybox">
+                <label class="small">
+                  <input id="switch-night" type="checkbox">
+                  <div class="daybox-top">
+                    <div class="moon"></div>
+                    <div class="wx-pic">
+                      <img class="day-pic" src="./img/${sortData[city]['WxValueNumber']}.svg" alt="">
+                      <img class="night-pic" src="./img/${sortData[city]['WxValue2Number']}.svg" alt="">
+                    </div>
+                    <svg></svg>
+                    <div class="text-area">
+                      <div class="location">${city}</div>
+                      <div class="infos">
+                        <div class="weatherWx day-info">${sortData[city]['WxValue']}</div>
+                        <div class="temperature day-info">${sortData[city]['MinValue']}-${sortData[city]['MaxValue']}°C</div>
+                        <div class="weatherWx night-info">${sortData[city]['WxValue2']}</div>
+                        <div class="temperature night-info">${sortData[city]['MinValue2']}-${sortData[city]['MaxValue2']}°C</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="daybox-bottom">                 
+                  </div>
+                </label>
+            `
+        })
+      });
+
+
+    fetch(
+      "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-B3FE9C48-C939-4B23-92B9-771F49BE49B1&elementName=Wx"
+    )
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (result) {
+        var weekDatas = JSON.parse(result);
+        var weekweathers = [];
+        console.log(weekDatas);
+        // weekDatas.records.locations[0].location 區域
+        // console.log(weekDatas.records.locations[0].location[0].weatherElement[0].time[1].elementValue[0].value);
+        // weekDatas.records.locations[0].location[0].weatherElement[0].time 1 3 5 7 9 11 13
+        // 跑一個迴圈取資料
+        for (var i = 0; i < weekDatas.records.locations[0].location.length; i++) {
+          var dailyCities = weekDatas.records.locations[0].location[i];
+          var dailyCity = weekDatas.records.locations[0].location[i].locationName;
+          var day1Number = Number(dailyCities.weatherElement[0].time[1].elementValue[1].value);
+          var day2Number = Number(dailyCities.weatherElement[0].time[3].elementValue[1].value);
+          var day3Number = Number(dailyCities.weatherElement[0].time[5].elementValue[1].value);
+          var day4Number = Number(dailyCities.weatherElement[0].time[7].elementValue[1].value);
+          var day5Number = Number(dailyCities.weatherElement[0].time[9].elementValue[1].value);
+          var day6Number = Number(dailyCities.weatherElement[0].time[11].elementValue[1].value);
+          var day7Number = Number(dailyCities.weatherElement[0].time[13].elementValue[1].value);
+          var day1NumberText = dailyCities.weatherElement[0].time[1].elementValue[0].value;
+          var day2NumberText = dailyCities.weatherElement[0].time[3].elementValue[0].value;
+          var day3NumberText = dailyCities.weatherElement[0].time[5].elementValue[0].value;
+          var day4NumberText = dailyCities.weatherElement[0].time[7].elementValue[0].value;
+          var day5NumberText = dailyCities.weatherElement[0].time[9].elementValue[0].value;
+          var day6NumberText = dailyCities.weatherElement[0].time[11].elementValue[0].value;
+          var day7NumberText = dailyCities.weatherElement[0].time[13].elementValue[0].value;
+
+          var weekData = {
+            day1Number,
+            day2Number,
+            day3Number,
+            day4Number,
+            day5Number,
+            day6Number,
+            day7Number,
+            day1NumberText,
+            day2NumberText,
+            day3NumberText,
+            day4NumberText,
+            day5NumberText,
+            day6NumberText,
+            day7NumberText,
+          }
+          weekweathers.push(weekData);
+          // console.log(weekweathers);
+        };
+
+        var weatherValues = document.querySelectorAll('.daybox-bottom');
+        // console.log(weatherValues[0].innerHTML);
+        weatherValues.forEach(function (weatherValue, i) {
+          // console.log(weatherValues[0].innerHTML);                
+          console.log(weatherValues[i].innerHTML);
+
+          weatherValues[i].innerHTML = '';
+          weatherValues[i].innerHTML += `
+                    <div class="day-weather">
+                      <h3>MON</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day1Number']}.svg" title="${weekweathers[i]['day1NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>TUE</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day2Number']}.svg" title="${weekweathers[i]['day2NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>WED</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day3Number']}.svg" title="${weekweathers[i]['day3NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>THU</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day4Number']}.svg" title="${weekweathers[i]['day4NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>FRI</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day5Number']}.svg" title="${weekweathers[i]['day5NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>SAT</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day6Number']}.svg" title="${weekweathers[i]['day6NumberText']}">
+                    </div>
+                    <div class="day-weather">
+                      <h3>SUN</h3>
+                      <img class="day-weather-pic" src="./img/${weekweathers[i]['day7Number']}.svg" title="${weekweathers[i]['day7NumberText']}">
+                    </div>`
+
+        });
+      });
+  </script>
+  <script>
+
+    var count = 0;
+    var timelength = Math.random() * 80;
+    console.log(timelength);
+    var timer = setInterval(function () {
+      count++;
+      var loadingPage = document.querySelector('.loading-page');
+      var loadingProgress = document.querySelector('.loading-progress');
+      var loadingNumber = document.querySelector('.loading-number');
+      var weatherContent = document.querySelector('.weather-content')
+      loadingProgress.style.width = count + "%";
+      loadingNumber.innerHTML = count + "%";
+      if (count >= 99) {
+        clearInterval(timer);
+        loadingPage.classList.add('complete');
+
+        setTimeout(function () {
+          loadingPage.remove();
+        }, 2000);
+
+        setTimeout(function () {
+          weatherContent.style.display = "grid";
+        }, 500);
+
+      }
+
+    }, timelength)
+
+
+  </script>
+
+</body>
+
+</html>
