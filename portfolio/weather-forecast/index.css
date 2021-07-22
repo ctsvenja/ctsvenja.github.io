@@ -1,0 +1,275 @@
+:root {
+    --color-white: #f3f3f3;
+    --color-yellow: #FFD633;
+    --color-black: #222;
+    --color-blue-start: #509cc5;
+    --color-blue-end: #1D678F;
+    --color-rain: #4DACFF;
+    --color-white-cloud: #f2f9fe;
+    --color-grey-cloud: #ccc;
+}
+
+* {
+    /* position: relative; */
+    font-family: 'Hind Vadodara', sans-serif, "微軟正黑體";
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.weather-content {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 400px);
+    column-gap: 40px;
+    row-gap: 40px;
+    padding: 10px;
+    display: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+input {
+    opacity: 0;
+}
+
+.daybox {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--color-white);
+    box-shadow: 10px 5px 20px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.daybox:hover .daybox-bottom {
+    height: 100px;
+}
+
+/* .rain {
+    width: 2px;
+    height: 10px;
+    position: absolute;
+    left: 45px;
+    bottom: 15px;
+    animation: raindrop 1s infinite linear;
+    background-color: var(--color-white);
+
+}
+
+.rain2 {
+    left: 70px;
+    bottom: 20px;
+    animation-delay: -0.4s;
+}
+
+.rain3 {
+    left: 30px;
+    bottom: 20px;
+    animation-delay: -0.7s;
+}
+
+@keyframes raindrop {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+} */
+
+
+.daybox-top {
+    width: 400px;
+    height: 220px;
+    background: linear-gradient(20deg, var(--color-black), var(--color-blue-start));
+    background-size: 100% 1000%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, .3);
+    border-radius: 10px 10px 0 0;
+    position: relative;
+}
+
+@keyframes daylight {
+    0% {
+        background-position: 100% 30%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.daybox-top>.moon {
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 15px -15px;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    transition: .5s;
+}
+
+@keyframes moonmove {
+    0% {
+        box-shadow: 15px -15px var(--color-yellow);
+        transform: translate(-15px, 15px);
+    }
+
+    100% {
+        box-shadow: -20px 20px var(--color-yellow);
+        transform: translate(20px, -20px);
+    }
+}
+
+.daybox-top .wx-pic {
+    position: absolute;
+    left: 240px;
+    bottom: 60px;
+    border-radius: 20px;
+    animation: cloudrift 2s infinite;
+}
+
+.daybox-top .wx-pic .night-pic {
+    display: none;
+}
+
+@keyframes cloudrift {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+
+.text-area {
+    display: inline-block;
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    color: var(--color-white);
+}
+
+.text-area .location {
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.text-area .temperature {
+    font-size: 20px;
+    line-height: 30px;
+    opacity: .7;
+
+}
+
+.text-area .weatherWx {
+    font-size: 20px;
+    opacity: .7;
+}
+
+.night-info {
+    display: none;
+    opacity: 0;
+}
+
+#all-night,
+#switch-night {
+    display: none;
+    /* transition-duration: .2s; */
+}
+
+#all-night:checked~section .daybox-top .moon,
+#switch-night:checked+.daybox-top .moon {
+    animation: moonmove 5s both;
+    opacity: 1;
+}
+#all-night:checked~section .daybox-top,
+#switch-night:checked+.daybox-top {
+    animation: daylight 7s both;
+}
+#all-night:checked~section .daybox-top .night-info ,
+#switch-night:checked+.daybox-top .night-info {
+    display: block;
+    opacity: .7;
+}
+#all-night:checked~section .daybox-top .day-info ,
+#switch-night:checked+.daybox-top .day-info {
+    display: none;
+}
+#all-night:checked~section .daybox-top .wx-pic .day-pic,
+#switch-night:checked+.daybox-top .wx-pic .day-pic {
+    display: none;
+}
+#all-night:checked~section .daybox-top .wx-pic .night-pic,
+#switch-night:checked+.daybox-top .wx-pic .night-pic {
+    display: block;
+}
+
+.daybox-bottom {
+    width: 400px;
+    /* height: 10px; */
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    transition-duration: 2s;
+}
+
+.daybox-bottom .day-weather {
+    width: calc(100% / 7 - 5px);
+    display: inline-block;
+    text-align: center;
+    top: 20px;
+    /* opacity: 0; */
+    transition: .5s;
+}
+
+.daybox-bottom .day-weather h3 {
+    font-size: 8px;
+    color: #22222288;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.daybox-bottom .day-weather .day-weather-pic {
+    width: 100%;
+    max-width: 40px;
+    height: 40px;
+}
+
+/* .daybox-bottom .day-weather svg .sun {
+    fill: var(--color-yellow);
+    stroke: #FFD63399;
+    stroke-width: 30px;
+    stroke-dasharray: 5px;
+}
+
+.daybox-bottom .day-weather svg .rain {
+    stroke: var(--color-rain);
+}
+
+.daybox-bottom .day-weather svg .cloud {
+    animation: cloudrift 2s infinite;
+    fill: var(--color-grey-cloud);
+} */
